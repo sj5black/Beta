@@ -1,17 +1,17 @@
 #Person 클래스 생성
 class Person() :
-    #생성자 선언 : name, gender, age를 매개변수로 받아 객체가 생성될 때 초기화되도록 설정
+    #생성자 선언 : name, gender, age를 매개변수로 받아 객체가 생성될 때 각 속성값들이 초기화되도록 설정
     def __init__(self, name, gender, age):
         self.name = name
         self.gender = gender
         self.age = age
 
-    #객체(self)의 속성값들을 호출하여 출력
+    #display 메서드 생성 : 객체(self)의 속성값들을 호출하여 출력
     def display(self) :
         print(f'이름 : {self.name}, 성별 : {self.gender}')
         print(f'나이 : {self.age}')
 
-    #객체(self)의 나이에 따른 인사말 분리
+    #greet 메서드 생성 : 객체(self)의 나이에 따른 인사말 분리
     def greet(self) :
         if self.age > 60 : print('어서오세요 어르신. 환영합니다.')
         elif self.age > 19 : print(f'{self.name}! 성인이시군요! 반갑습니다.')
