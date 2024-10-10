@@ -2,6 +2,12 @@
 class Person() :
     #생성자 선언 : name, gender, age를 매개변수로 받아 객체가 생성될 때 각 속성값들이 초기화되도록 설정
     def __init__(self, name, gender, age):
+        
+        #입력받은 성별이 male 또는 female이 아닐 경우, 올바른 입력이 될때까지 재입력 유도
+        while gender not in ['male', 'female'] :
+            print("잘못된 성별입니다. 'male' 또는 'female'을 입력하세요.")
+            gender=(input('성별 : '))
+
         self.name = name
         self.gender = gender
         self.age = age
@@ -18,23 +24,29 @@ class Person() :
         elif self.age > 13 : print(f'{self.name}! 청소년이시군요! 반갑습니다.')
         elif self.age <= 13 : print(f'안녕, {self.name}! 어린이구나! 반가워~')
 
+#나이 입력 함수. 정수 변환 시 발생할 수 있는 ValueError의 원활한 예외처리 및 진행을 위해 생성
+def input_age() : 
+    while True : 
+        age_temp = input('나이 : ')
+        try : 
+            result = int(age_temp)
+            #나이가 1보다 작아도 루프문 상단으로 반환
+            if result < 1 :
+                print("잘못된 값입니다. 1 이상의 정수를 입력하세요.")
+            #모든 유효성 검사 종료 후 정상적인 나이값 반환(무한루프 종료)
+            return result
+        except ValueError : 
+            print("잘못된 값입니다. 1 이상의 정수를 입력하세요.")
+
 #입력받을 나이, 이름, 성별에 대한 변수 선언 및 초기화
 Age = 0
 Name = ''
 Gender = ''
 
-# Age 변수가 1보다 작을 경우, 경고구문 출력 후 재입력
-while Age < 1 :
-    Age = int(input('나이 : '))
-    if Age < 1 : print("나이는 최소 1살 이상이어야 합니다.")
-    
+#human1의 요소(Atrribute) 입력
+Age = input_age()
 Name = input('이름 : ')
-
-# Gender 변수가 male 이나 female 이 아닐 경우, 경고구문 출력 후 재입력
-while Gender not in ['male', 'female'] :
-    Gender = input('성별 : ')
-    if Gender not in ['male', 'female'] :
-        print("잘못된 성별을 입력하셨습니다. 'male' 또는 'female'을 입력하세요.")
+Gender = input('성별 : ')
 
 #human1이라는 객체 생성
 human1 = Person(Name, Gender, Age)
