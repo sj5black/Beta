@@ -62,12 +62,13 @@ del df['소계(검거)']
 # print(df)
 
 #7번
-dic7 = {'강간(발생)':'강간',
-'강도(발생)':'강도',
-'살인(발생)':'살인',
-'절도(발생)':'절도',
-'폭력(발생)':'폭력'}
-df.rename(columns=dic7, inplace=True)
+# 빈 딕셔너리 생성
+dic7 = {}
+# for문을 활용해 crime 리스트에 있는 이름별로 딕셔너리 요소 추가
+for name in crime :
+    dic7[name+'(발생)'] = name
+# dic7에 매칭되는 내용으로 rename함수를 사용해 컬럼명 변경
+df.rename(dic7, inplace=True, axis=1)
 # print(df)
 
 #도전과제 1번
