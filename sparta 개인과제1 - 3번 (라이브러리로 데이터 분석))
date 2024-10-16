@@ -41,20 +41,22 @@ df.drop(columns='관서명', inplace=True)
 df.drop(['구 없음'], inplace=True)
 
 #5번
+#범죄 리스트 생성
+crime = ['강간','강도','살인','절도','폭력']
+
 #axis=1을 사용해 기존 행간의 연산을 컬럼간 연산으로 사용
-df['강간검거율'] = df.apply(lambda row : 100*row['강간(검거)']/row['강간(발생)'], axis=1)
-df['살인검거율'] = df.apply(lambda row : 100*row['살인(검거)']/row['살인(발생)'], axis=1)
-df['절도검거율'] = df.apply(lambda row : 100*row['절도(검거)']/row['절도(발생)'], axis=1)
-df['폭력검거율'] = df.apply(lambda row : 100*row['폭력(검거)']/row['폭력(발생)'], axis=1)
+#crime 내의 범죄들에 대해 검거율 컬럼 추가
+for name in crime :
+    df[name + ' 검거율'] = df.apply(lambda row: 100 * row[name + '(검거)'] / row[name + '(발생)'], axis=1)
+
+#총 검거율 컬럼 추가
 df['검거율'] = df.apply(lambda row : 100*row['소계(검거)']/row['소계(발생)'], axis=1)
 # print(df)
 
 #6번
-del df['강간(검거)']
-del df['강도(검거)']
-del df['살인(검거)']
-del df['절도(검거)']
-del df['폭력(검거)']
+for name in crime :
+  del df[name+'(검거)']
+
 del df['소계(발생)']
 del df['소계(검거)']
 # print(df)
